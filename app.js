@@ -2,7 +2,6 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
 const app = express();
-require('dotenv').config();
 
 const DB_NAME = 'problemset3-4';
 const COLLECTION_NAME = 'places';
