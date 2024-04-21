@@ -31,6 +31,7 @@ const isPlace = (str) => {
 app.post('/process', async (req, res) => {
     // read the data from the form
     const formEntry = req.body.placeOrZipCode.trim();
+    console.log('Retrieved data');
 
     let mongoQuery;
     // decide whether the data is a place or a zip code
@@ -47,9 +48,11 @@ app.post('/process', async (req, res) => {
     try {
         // Connect to MongoDB
         const mongoClient = await MongoClient.connect(process.env.MONGO_URL);
+        console.log('Connected to client');
         const db = mongoClient.db(DB_NAME);
         const placesCollection = db.collection(COLLECTION_NAME);
         const result = await placesCollection.findOne(mongoQuery);
+        console.log('Retrieved result');
 
         const returnBtn = '<a href="/" class="btn">Back to Search</a>';
         const header = '<h1>Places/Zip Code Retrieval</h1>';
