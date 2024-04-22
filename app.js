@@ -27,6 +27,16 @@ const isPlace = (str) => {
     return isNaN(parseInt(firstChar));
 }
 
+const formatPlace = (str) => {
+    if (str && str.length > 1) {
+        // capitalize first letter, set the rest to lowercase
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    } else {
+        // just return string because we know there will be no results anyway
+        return str;
+    }
+}
+
 // "process" view - Read form data and display it
 app.post('/process', async (req, res) => {
     // read the data from the form
@@ -38,7 +48,7 @@ app.post('/process', async (req, res) => {
     // check the first character
     if (isPlace(formEntry)) {
         // query will be based on places
-        mongoQuery = { place: formEntry };
+        mongoQuery = { place: formatPlace(formEntry) };
     } else {
         // query will be based on zip code
         mongoQuery = { zips: formEntry };
